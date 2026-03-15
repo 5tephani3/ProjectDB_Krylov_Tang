@@ -1,0 +1,84 @@
+To ensure your database feels like a real-world production environment for a major music player, I have updated the prompt with the Hardstyle/EDM specific context and increased the description of the database complexity.
+
+Here is the final version. You can save the text below as prompt_for_3_insertion.txt.
+
+Final Generation Prompt for 3_insertion.sql
+
+Role Context:
+You are a Lead Data Architect and Senior BI Consultant with over 15 years of experience in the global music industry. You have previously designed infrastructures for industry giants such as Q-dance, Spinnin' Records, and Spotify.
+
+Today, you are assigned to populate the production environment for 'TheEmpireDB', a cutting-edge platform specialized in Hardstyle, EDM, and their respective subgenres (Rawstyle, Euphoric, Techno, Trance, Dubstep, etc.). This is a high-complexity relational system in 3rd Normal Form (3NF). It must handle:
+
+Financial Transactions: Merchandise sales and high-demand festival ticketing.
+
+Streaming Architecture: Managing relationships between multi-artist collaborations (N:M).
+
+Big Data Logging: High-frequency event tracking for user recommendations (Listening History).
+
+Objective:
+Generate a comprehensive SQL script to populate the database. The data must be thematically accurate to the EDM/Hardstyle scene while strictly adhering to the Business Rules and Raw Data Dictionary.
+
+Relational Model & Order of Insertion:
+Populate the tables in this order to satisfy Foreign Key (FK) dependencies:
+
+Record_Label (Label_ID, Record_Label_Name) — Examples: Scantraxx, Revealed, Dirty Workz.
+
+User (User_ID, First_Name, Last_Name, Email_Address, Password_Hash, Date_of_Birth, Country)
+
+Artist (Artist_ID, Artist_Name, Artist_Genre, Label_ID#) — Examples: Sub Zero Project, Charlotte de Witte, Martin Garrix.
+
+Subscription (Sub_ID, User_ID#, Subscription_Type, Subscription_Start_Date, Subscription_End_Date, Payment_Method_Type, Payment_Status)
+
+Album (Album_ID, Album_Title, Album_Release_Date)
+
+Song (Song_ID, Song_Title, Song_Duration, Album_ID#)
+
+Artist_Performance (Artist_ID#, Song_ID#) — Crucial for EDM collaborations/remixes.
+
+Podcast (Podcast_ID, Podcast_Title, User_ID#) — Examples: 'Hardwell On Air', 'A State of Trance'.
+
+Playlist (Playlist_ID, Playlist_Name, Playlist_Creation_Date, User_ID#)
+
+Playlist_Content (Playlist_ID#, Song_ID#)
+
+Event (Event_ID, Event_Name, Event_Date, Venue_Name, Venue_City, Ticket_Price) — Examples: Defqon.1, Tomorrowland, Ultra.
+
+Merch (Merch_ID, Merch_Name, Merch_Price, Stock_Quantity, Artist_ID#, Event_ID#)
+
+Listening_History (History_ID, User_ID#, Song_ID#, Listening_Timestamp)
+
+Data Volume & Quality Requirements:
+
+Users: 30 rows. Names must be multicultural (global fans from NL, BE, US, CL, KR, FR, etc.).
+
+Artists & Labels: 15 rows each. Genres must cover Hardstyle/EDM subgenres.
+
+Albums & Songs: 20 albums and 60+ songs.
+
+Events & Merch: 15 rows each (Venues like 'Ziggo Dome', 'Boom', 'Miami').
+
+History: 100+ rows to simulate realistic user engagement.
+
+Business Rules & Technical Constraints:
+
+Integrity: Subscription_End_Date > Subscription_Start_Date. Subscription_Type is 'Free' or 'Paid'.
+
+Financials: Ticket_Price and Merch_Price are DECIMAL(8,2) and > 0. Stock_Quantity is INTEGER and >= 0.
+
+EDM Logic: Songs must be linked to at least one Artist. Every User must have an active Subscription. Playlists must contain at least 3 songs.
+
+Output Format:
+
+Provide a single SQL script ready for MySQL/MariaDB execution.
+
+Group by table with clear comments.
+
+Do NOT include CREATE TABLE statements. Use only INSERT INTO.
+
+Why this is more precise:
+
+Thematic Accuracy: By mentioning Q-dance or Defqon.1, the AI will generate data that looks professional (e.g., using "Rawstyle" as a genre rather than just "Music").
+
+N:M Handling: It explicitly mentions Artist_Performance for "collaborations/remixes," which is a hallmark of EDM complexity.
+
+High-Availability Context: It frames the database as a production tool, which encourages the AI to generate more realistic timestamps and record IDs.
