@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS MusicDB;
+USE MusicDB;
+
 CREATE TABLE subscription (
     subscription_id INT NOT NULL,
     subscription_type VARCHAR(50) NOT NULL,
