@@ -1,0 +1,90 @@
+Final Generation Prompt for 3_insertion.sql
+
+Role Context:
+You are a Lead Data Architect and Senior BI Consultant with over 15 years of experience in the global music industry. You have previously designed infrastructures for industry giants such as Q-dance, Spinnin' Records, and Spotify.
+
+Today, you are assigned to populate the production environment for 'TheEmpireDB' (MusicDB), a cutting-edge platform specialized in Hardstyle, EDM, and their respective subgenres (Rawstyle, Euphoric, Techno, Trance, Dubstep, etc.). This is a high-complexity relational system in 3rd Normal Form (3NF). It must handle financial transactions (Merchandise/Tickets), Streaming Architecture (multi-artist collaborations), and Big Data Logging (listening history).
+
+Objective:
+Generate a comprehensive SQL script to populate the database. The data must be thematically accurate to the EDM/Hardstyle scene while strictly adhering to the column names and table structures defined in the 1_creation.sql file.
+
+Relational Model & Order of Insertion:
+Populate the tables in this specific order to satisfy Foreign Key (FK) dependencies:
+
+subscription (subscription_id, subscription_type, subscription_start_date, subscription_end_date)
+
+record_label (record_label_name) — Note: Primary Key is the name string.
+
+album (album_id, album_title, album_release_date)
+
+podcast (podcast_id, podcast_title)
+
+venue (venue_name, venue_city)
+
+ticket (ticket_id, ticket_price, ticket_status)
+
+merch (merch_id, merch_name, merch_price)
+
+user (user_id, first_name, last_name, email_address, password_hash, date_of_birth, country, subscription_id)
+
+song (song_id, song_title, song_duration, album_id)
+
+artist (artist_id, artist_name, artist_genre, record_label_name)
+
+stock (merch_id, stock_quantity)
+
+event (event_id, event_name, event_start_date, event_end_date, venue_name, ticket_id, merch_id)
+
+payment (payment_id, payment_method_type, payment_status, subscription_id, ticket_id)
+
+listening_timestamp (user_id, song_id, listening_timestamp_date)
+
+playlist (playlist_id, playlist_name, playlist_creation_date, user_id)
+
+Link Tables: contains (playlist_id, song_id), performs (artist_id, song_id), releases (artist_id, album_id), purchases (user_id, merch_id), follows (user_id, artist_id), collabs (artist_id, artist_id_1), hosted_event (artist_id, event_id), hosted_podcast (artist_id, podcast_id).
+
+Data Volume & Quality Requirements (250% Increase):
+
+Users: 75 rows (Multicultural global fans from NL, BE, US, CL, KR, FR, etc.).
+
+Artists & Labels: 40 rows each. Genres: Rawstyle, Euphoric, Hardcore, Techno, etc.
+
+Albums & Songs: 50 albums and 150+ songs.
+
+Events, Venues, Tickets: 40 entries each (Venues like 'Ziggo Dome', 'Gashouder', 'Bayfront Park').
+
+History (listening_timestamp): 250+ entries to simulate high user activity.
+
+Business Rules & Technical Constraints:
+
+Integrity: event_end_date >= event_start_date. song_duration > 0.
+
+Financials: ticket_price and merch_price must be DECIMAL(10,2) and >= 0. stock_quantity >= 0.
+
+Relationships: Use the link tables correctly. For example, a song is performed by an artist via the performs table. Ensure every artist is linked to a record_label_name.
+
+Output Format:
+
+Provide a single SQL script ready for MySQL/MariaDB.
+
+Group by table with clear comments.
+
+Use only INSERT INTO statements. Do NOT include CREATE TABLE statements.
+
+Ensure all string values are enclosed in single quotes.
+
+Summary of Corrections made to match your 1_creation.sql:
+
+record_label: Changed from Label_ID to just record_label_name.
+
+user: Included subscription_id as an FK inside the user table as declared.
+
+stock: Properly identified as its own table linked to merch_id.
+
+event: Included event_start_date, event_end_date, venue_name, ticket_id, and merch_id.
+
+Listening History: Corrected table name to listening_timestamp and columns to user_id, song_id, listening_timestamp_date.
+
+collabs: Corrected columns to artist_id and artist_id_1.
+
+hosted_podcast: Added to handle the link between artists and podcasts.
