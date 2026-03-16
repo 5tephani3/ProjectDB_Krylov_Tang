@@ -159,7 +159,7 @@ Raw Data Dictionary :
 | Stock_Quantity          | Available quantity of a merchandise item            | INTEGER   | 6 digits                    |
 | Listening_Timestamp     | Date and time when a song or podcast was played     | DATETIME  | 19 characters               |
 
-<img width="1056" height="882" alt="image" src="https://github.com/user-attachments/assets/10f27165-8cf4-4252-b16e-c3c898fa8159" />
+![MCD Diagram](./images/MCD.png)
 
 _____________________________________________________________________________________________________________________________________________
 This document presents the comprehensive **Usage Scenario and Query Analysis** for *The Empire Records* database project. It is designed to guide stakeholders, developers, and auditors through the business logic and technical implementation of the system's Business Intelligence (BI) operations.
