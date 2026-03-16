@@ -159,8 +159,14 @@ Raw Data Dictionary :
 | Stock_Quantity          | Available quantity of a merchandise item            | INTEGER   | 6 digits                    |
 | Listening_Timestamp     | Date and time when a song or podcast was played     | DATETIME  | 19 characters               |
 
+--CDM--
 <img width="1056" height="882" alt="image" src="project MCD.png" />
+--LDM--
 <img width="1056" height="882" alt="image" src="project LDM.png" />
+
+! Remark : In the Logical Data Model, several elements differ from the CDM because MERISE requires specific transformations to ensure normalization and relational consistency.
+Some associations that appear as simple relationships in the CDM must become entities in the LDM when they contain attributes or when they represent many‑to‑many relationships.
+Similarly, n‑ary relationships, such as the ‘Hosted’ relation, cannot remain ternary in the LDM and must be decomposed into multiple binary associations.
 
 _____________________________________________________________________________________________________________________________________________
 This document presents the comprehensive **Usage Scenario and Query Analysis** for *The Empire Records* database project. It is designed to guide stakeholders, developers, and auditors through the business logic and technical implementation of the system's Business Intelligence (BI) operations.
