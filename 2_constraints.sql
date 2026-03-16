@@ -22,3 +22,17 @@ ALTER TABLE collabs
 
 ALTER TABLE event
     ADD CONSTRAINT chk_event_dates CHECK (event_end_date IS NULL OR event_end_date >= event_start_date);
+
+ALTER TABLE artist
+ADD CONSTRAINT fk_artist_label
+FOREIGN KEY (record_label_name) 
+REFERENCES record_label(record_label_name)
+ON DELETE SET NULL
+ON UPDATE CASCADE;
+
+ALTER TABLE stock
+ADD CONSTRAINT fk_stock_merch
+FOREIGN KEY (merch_id) 
+REFERENCES merch(merch_id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
